@@ -1,0 +1,23 @@
+{{define "root"}}
+<html>
+    <head>
+        {{template "styles" .}}
+    </head>
+    <body>
+        <a href="#anchor">click</a>
+        <div id="change">
+             This is the original text.
+        </div>
+        {{template "scripts" .}}
+    </body>
+</html>
+{{end}}
+
+{{define "scripts"}}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/script.js"></script>
+{{end}}
+
+{{define "styles"}}
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+{{end}}

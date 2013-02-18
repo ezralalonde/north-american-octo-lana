@@ -1,0 +1,67 @@
+el-min-gae
+==========
+
+This is a sample project that has everything setup for starting an
+appengine/go project.
+
+Like makefiles and java projects, I can get around pretty well if there's
+already something there, but I "green-field" so rarely that when I have to
+start it takes way longer than it should.
+
+To that end, this project is about the minimum that you can get away with on
+an appengine project: there's only one go source, one handler, one template,
+one js, and one css. Crucially, the css and js and templates and static dir
+are all setup so you don't have to dick around figuring out paths in test,
+then fixing them in production; it should just work.
+
+----------------------------------------
+
+What happens when you run this project is that there's on page, with a giant
+anchor named "click", if you click on it the text underneath will change
+in place.
+That's the idea, anyway. If it doesn't change, or the text isn't gimantic,
+then the css or js or handlers aren't working. Since the whole idea of this
+project is to have a working "hello world" version it, in theory, should work.
+
+Obviously, there's nothing useful in this project; install what you're making
+"adjacent" to the included files, and make your changes to app.yaml, etc.
+
+That is, static files go in "static", which has a "js" and a "css" directory,
+go sources go in "app", and the templates kick around the root directory.
+None of that's set in stone, since it's a simple project it should be simple
+to make changes so that it's to your liking.
+
+Finally, there may be some pedagogical value in this project since, even
+though it's very simple, it does include a go handler, some jquery ajaxy
+stuff, css, app.yaml, html, etc. that all work, and I have taken pains to
+make the setup both "absolutely minimal", and "correct". The project is
+therefore fairly simple to build off or use as a template.
+
+Certainly, the whole thing is substantially simpler than the docs that I look
+at when I need to start fresh every couple months; but I'm not selling
+page-views, so...
+
+----------------------------------------------
+
+The only weird thing is the templates, which maybe deserves a mention. There
+are "get" and "load" functions. "load" compiles the template, basically, and
+"get" accesses it. If you try to get something that hasn't been loaded it will
+try for you. If it's missing in either case, we "panic".
+
+What's weird is that you load them by their non-html post-fixed names, and
+that you can load multiple at once. Basically, this provides simple (fragile!)
+namespaces for your templates; though it's not really fair to call them that
+since they're actually nothing.
+
+The idea is that if you have 3 templates:
+
+- "base" (has "root" template)
+- "one" (has "body" template)
+- "two" (has "body" template)
+
+Base has a "hole" in it for "body" (ie. "{{ template "body" . }}), and that
+get filled by different templates depending on whether you say
+`get("base one")` or `get("base two")`
+
+You can render them the same both ways (t.ExecuteTemplate(...)), and not have
+to carry around templates in your data or do multi-stage/nested rendering.
