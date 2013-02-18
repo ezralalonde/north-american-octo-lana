@@ -1,10 +1,10 @@
 package el_min_gae
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"strings"
-    "fmt"
 )
 
 var (
@@ -17,16 +17,16 @@ func init() {
 }
 
 func templateInit() {
-    load("demo")
+	load("demo")
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-    if r.URL.Path == "/" {
-	    t := get("demo")
-	    t.ExecuteTemplate(w, "root", nil)
-    } else {
-        w.Write([]byte(fmt.Sprintf("I'd rather be at %s", r.URL.Path)))
-    }
+	if r.URL.Path == "/" {
+		t := get("demo")
+		t.ExecuteTemplate(w, "root", nil)
+	} else {
+		w.Write([]byte(fmt.Sprintf("I'd rather be at %s", r.URL.Path)))
+	}
 }
 
 func get(name string) *template.Template {
@@ -39,7 +39,7 @@ func get(name string) *template.Template {
 
 func load(name string) {
 	fields := strings.Fields(name)
-	shortname := fields[len(fields) - 1]
+	shortname := fields[len(fields)-1]
 	template := template.New(shortname)
 	for _, name := range fields {
 		if !strings.HasSuffix(name, ".html") {
