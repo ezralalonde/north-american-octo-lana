@@ -1,12 +1,9 @@
-el-min-gae
-==========
-
 This is a sample project that has everything setup for starting an
 appengine/go project.
 
 Like makefiles and java projects, I can get around pretty well if there's
 already something there, but I "green-field" so rarely that when I have to
-start it takes way longer than it should.
+start fresh it takes way longer than it should.
 
 To that end, this project is about the minimum that you can get away with on
 an appengine project: there's only one go source, one handler, one template,
