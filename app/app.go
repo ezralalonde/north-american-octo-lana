@@ -1,4 +1,4 @@
-package el_min_gae
+package app
 
 import (
 	"fmt"
